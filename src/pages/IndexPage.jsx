@@ -1,7 +1,9 @@
+import GameImage from "../components/GameImage";
+
 const IndexPage = () => {
   return (
     <div>
-      Test hello
+      <GameImage />
     </div>
   );
 };
