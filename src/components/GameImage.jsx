@@ -12,7 +12,7 @@ const Image = styled.div`
 
 const GameImage = () => {
   const [targetClick, setTargetClick] = useState(false);
-  const [coords, setCoords] = useState({x: '', y: ''});
+  const [coords, setCoords] = useState({x: null, y: null});
 
   const handleClick = (event) => {
     const container = event.currentTarget.getBoundingClientRect();
