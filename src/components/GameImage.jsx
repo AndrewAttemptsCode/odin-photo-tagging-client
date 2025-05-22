@@ -19,11 +19,24 @@ const ImageContainer = styled.div`
 
 const GameImage = () => {
   const [targetClick, setTargetClick] = useState(false);
-  const [pixelCoords, setPixelCoords] = useState({x: 0, y: 0});
-  const [normalizedCoords, setNormalizedCoords] = useState({x: 0, y: 0});
+  const [pixelCoords, setPixelCoords] = useState({ x: 0, y: 0 });
+  const [normalizedCoords, setNormalizedCoords] = useState({ x: 0, y: 0 });
 
   const handleGuess = (name) => {
-    alert(name);
+    const { x, y } = normalizedCoords;
+
+    const items = [ 
+      { name: 'ball', x: 0.67, y: 0.64, deviation: 0.02 },
+      { name: 'sludge', x: 0.34, y: 0.90, deviation: 0.03 },
+      { name: 'ballboy', x: 0.35, y: 0.49, deviation: 0.045 },
+      { name: 'inflatable', x: 0.60, y: 0.88, deviation: 0.045 }, 
+    ];
+
+    const guess = items.find(item => item.name === name);
+    if (Math.abs(x - guess.x) < guess.deviation && Math.abs(y - guess.y) < guess.deviation) {
+      alert(`You got the ${guess.name}`);
+    }
+
   };
 
   const handleClick = (event) => {
