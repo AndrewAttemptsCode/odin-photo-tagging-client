@@ -24,13 +24,14 @@ const Dropdown = styled.div`
   }
 `
 
-const TargetDropdown = ({ x, y }) => {
+const TargetDropdown = ({ x, y, onGuess }) => {
   return (
     <Dropdown $x={`${x}px`} $y={`${y}px`}>
       <ul>
-        <li onClick={() => alert('Wally!')}>Wally</li>
-        <li onClick={() => alert('Wilma!')}>Wilma</li>
-        <li onClick={() => alert('Odlaw!')}>Odlaw</li>
+        <li onClick={() => onGuess('ball')}>Ball</li>
+        <li onClick={() => onGuess('sludge')}>Sludge</li>
+        <li onClick={() => onGuess('ballboy')}>Ball Boy</li>
+        <li onClick={() => onGuess('inflatable')}>Inflatable</li>
       </ul>
     </Dropdown>
   );

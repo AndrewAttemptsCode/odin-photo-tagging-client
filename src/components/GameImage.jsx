@@ -22,6 +22,10 @@ const GameImage = () => {
   const [pixelCoords, setPixelCoords] = useState({x: 0, y: 0});
   const [normalizedCoords, setNormalizedCoords] = useState({x: 0, y: 0});
 
+  const handleGuess = (name) => {
+    alert(name);
+  };
+
   const handleClick = (event) => {
     const container = event.currentTarget.getBoundingClientRect();
 
@@ -33,7 +37,7 @@ const GameImage = () => {
 
     console.log(`Normalized X: ${normalizedX}, normalized Y: ${normalizedY}`);
     console.log(`click: pos x: ${x} pos y: ${y}`);
-    
+
     setPixelCoords({x, y});
     setNormalizedCoords({x: normalizedX, y: normalizedY});
     setTargetClick(!targetClick);
@@ -42,7 +46,7 @@ const GameImage = () => {
   return (
     <ImageContainer onClick={handleClick}>
       <img src={beach} alt="" />
-      {targetClick && <TargetBox pixelCoords={pixelCoords} />}
+      {targetClick && <TargetBox pixelCoords={pixelCoords} handleGuess={handleGuess} />}
     </ImageContainer>
   );
 };
