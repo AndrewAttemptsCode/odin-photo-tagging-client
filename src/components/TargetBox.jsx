@@ -1,8 +1,8 @@
 import TargetMarker from "./TargetMarker";
 import TargetDropdown from "./TargetDropdown";
 
-const TargetBox = ({ coords }) => {
-  const { x, y } = coords;
+const TargetBox = ({ pixelCoords }) => {
+  const { x, y } = pixelCoords;
   return (
     <>
     <TargetMarker x={x} y={y} />
