@@ -1,13 +1,21 @@
 import styled from "styled-components";
 import TargetBox from "./TargetBox";
 import { useState } from "react";
+import beach from "../assets/beach.webp";
 
-const Image = styled.div`
+const ImageContainer = styled.div`
   position: relative;
-  height: 400px;
-  width: 800px;
+  height: auto;
+  max-width: 900px;
+  border-radius: 10px;
   background-color: aquamarine;
   cursor: crosshair;
+
+  & img {
+    object-fit: contain;
+    width: 100%;
+    height: 100%;
+  }
 `
 
 const GameImage = () => {
@@ -25,9 +33,10 @@ const GameImage = () => {
   }
 
   return (
-    <Image onClick={handleClick}>
+    <ImageContainer onClick={handleClick}>
+      <img src={beach} alt="" />
       {targetClick && <TargetBox coords={coords} />}
-    </Image>
+    </ImageContainer>
   );
 };
 
