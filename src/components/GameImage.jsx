@@ -15,28 +15,29 @@ const ImageContainer = styled.div`
     height: 100%;
     border-radius: 15px;
   }
-`
+`;
 
 const GameImage = () => {
   const [targetClick, setTargetClick] = useState(false);
   const [pixelCoords, setPixelCoords] = useState({ x: 0, y: 0 });
   const [normalizedCoords, setNormalizedCoords] = useState({ x: 0, y: 0 });
 
-  const handleGuess = (name) => {
+  const handleGuess = async (name) => {
     const { x, y } = normalizedCoords;
+    try {
+      const response = await fetch(`${import.meta.env.VITE_SERVER_URL}/guess`, {
+        method: "post",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ name, coordX: x, coordY: y }),
+      });
 
-    const items = [ 
-      { name: 'ball', x: 0.67, y: 0.64, deviation: 0.02 },
-      { name: 'sludge', x: 0.34, y: 0.90, deviation: 0.03 },
-      { name: 'ballboy', x: 0.35, y: 0.49, deviation: 0.045 },
-      { name: 'inflatable', x: 0.60, y: 0.88, deviation: 0.045 }, 
-    ];
-
-    const guess = items.find(item => item.name === name);
-    if (Math.abs(x - guess.x) < guess.deviation && Math.abs(y - guess.y) < guess.deviation) {
-      alert(`You got the ${guess.name}`);
+      const data = await response.json();
+      console.log("Guess response:", data);
+    } catch (err) {
+      console.error(err);
     }
-
   };
 
   const handleClick = (event) => {
@@ -51,15 +52,17 @@ const GameImage = () => {
     console.log(`Normalized X: ${normalizedX}, normalized Y: ${normalizedY}`);
     console.log(`click: pos x: ${x} pos y: ${y}`);
 
-    setPixelCoords({x, y});
-    setNormalizedCoords({x: normalizedX, y: normalizedY});
+    setPixelCoords({ x, y });
+    setNormalizedCoords({ x: normalizedX, y: normalizedY });
     setTargetClick(!targetClick);
-  }
+  };
 
   return (
     <ImageContainer onClick={handleClick}>
       <img src={beach} alt="" />
-      {targetClick && <TargetBox pixelCoords={pixelCoords} handleGuess={handleGuess} />}
+      {targetClick && (
+        <TargetBox pixelCoords={pixelCoords} handleGuess={handleGuess} />
+      )}
     </ImageContainer>
   );
 };
