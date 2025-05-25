@@ -70,7 +70,7 @@ const GameImage = () => {
         <TargetBox pixelCoords={pixelCoords} handleGuess={handleGuess} />
       )}
       <ToastContainer
-        position="bottom-left"
+        position="top-center"
         autoClose={3000}
         theme="colored"
       />
