@@ -3,12 +3,14 @@ import sludge from "../assets/sludge.webp";
 import ball from "../assets/ball.webp";
 import inflatable from "../assets/inflatable.webp";
 import ballboy from "../assets/ballboy.webp";
+import { useEffect, useState } from "react";
 
 const Dropdown = styled.div`
   position: absolute;
   top: ${({$y}) => $y};
   left: ${({$x}) => $x};
-  transform: translate(20%, 15%);
+  transform: ${({$direction}) => 
+    $direction === "up" ? "translate(20%, -100%)" : "translate(20%, 15%)"};
   background-color: rgba(0, 0, 0, 0.5);
   border-radius: 5px;
 
@@ -40,8 +42,16 @@ const Dropdown = styled.div`
 `
 
 const TargetDropdown = ({ x, y, onGuess }) => {
+  const [direction, setDirection] = useState("down");
+
+  useEffect(() => {
+    const dropdownHeight = 400;
+    const windowHeight = window.innerHeight - y;
+    setDirection(windowHeight < dropdownHeight ? "up" : "down");
+  }, [y]);
+
   return (
-    <Dropdown $x={`${x}px`} $y={`${y}px`}>
+    <Dropdown $x={`${x}px`} $y={`${y}px`} $direction={direction}>
       <ul>
         <li onClick={() => onGuess('ball')}>
           <img src={ball} />
