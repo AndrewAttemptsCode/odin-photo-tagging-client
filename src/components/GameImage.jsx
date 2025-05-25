@@ -2,6 +2,7 @@ import styled from "styled-components";
 import TargetBox from "./TargetBox";
 import { useState } from "react";
 import beach from "../assets/beach.webp";
+import { ToastContainer, toast } from "react-toastify";
 
 const ImageContainer = styled.div`
   position: relative;
@@ -35,6 +36,11 @@ const GameImage = () => {
 
       const data = await response.json();
       console.log("Guess response:", data);
+
+      data.status === "success"
+      ? toast.success(data.message)
+      : toast.error(data.message)
+
     } catch (err) {
       console.error(err);
     }
@@ -63,6 +69,11 @@ const GameImage = () => {
       {targetClick && (
         <TargetBox pixelCoords={pixelCoords} handleGuess={handleGuess} />
       )}
+      <ToastContainer
+        position="bottom-left"
+        autoClose={3000}
+        theme="colored"
+      />
     </ImageContainer>
   );
 };
