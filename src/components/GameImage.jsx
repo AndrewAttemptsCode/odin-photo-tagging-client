@@ -22,6 +22,7 @@ const GameImage = () => {
   const [targetClick, setTargetClick] = useState(false);
   const [pixelCoords, setPixelCoords] = useState({ x: 0, y: 0 });
   const [normalizedCoords, setNormalizedCoords] = useState({ x: 0, y: 0 });
+  const [correctGuesses, setCorrectGuesses] = useState([]);
 
   const handleGuess = async (name) => {
     const { x, y } = normalizedCoords;
@@ -37,9 +38,13 @@ const GameImage = () => {
       const data = await response.json();
       console.log("Guess response:", data);
 
-      data.status === "success"
-      ? toast.success(data.message)
-      : toast.error(data.message)
+      if (data.status === "success") {
+        toast.success(data.message);
+        setCorrectGuesses(prev => [...prev, name]);
+        return;
+      }
+      
+      toast.error(data.message)
 
     } catch (err) {
       console.error(err);
@@ -67,7 +72,7 @@ const GameImage = () => {
     <ImageContainer onClick={handleClick}>
       <img src={beach} alt="" />
       {targetClick && (
-        <TargetBox pixelCoords={pixelCoords} handleGuess={handleGuess} />
+        <TargetBox pixelCoords={pixelCoords} handleGuess={handleGuess} correctGuesses={correctGuesses} />
       )}
       <ToastContainer
         position="top-center"
