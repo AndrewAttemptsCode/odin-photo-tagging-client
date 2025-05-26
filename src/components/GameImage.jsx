@@ -3,6 +3,7 @@ import TargetBox from "./TargetBox";
 import { useState } from "react";
 import beach from "../assets/beach.webp";
 import { ToastContainer, toast } from "react-toastify";
+import CorrectMarker from "./CorrectMarker";
 
 const ImageContainer = styled.div`
   position: relative;
@@ -23,9 +24,11 @@ const GameImage = () => {
   const [pixelCoords, setPixelCoords] = useState({ x: 0, y: 0 });
   const [normalizedCoords, setNormalizedCoords] = useState({ x: 0, y: 0 });
   const [correctGuesses, setCorrectGuesses] = useState([]);
+  const [markers, setMarkers] = useState([]);
 
   const handleGuess = async (name) => {
     const { x, y } = normalizedCoords;
+    
     try {
       const response = await fetch(`${import.meta.env.VITE_SERVER_URL}/guess`, {
         method: "post",
@@ -41,6 +44,10 @@ const GameImage = () => {
       if (data.status === "success") {
         toast.success(data.message);
         setCorrectGuesses(prev => [...prev, name]);
+        setMarkers(prev => [
+          ...prev,
+          { x: pixelCoords.x, y: pixelCoords.y },
+        ]);
         return;
       }
       
@@ -79,6 +86,7 @@ const GameImage = () => {
         autoClose={3000}
         theme="colored"
       />
+      {markers && <CorrectMarker markers={markers} />}
     </ImageContainer>
   );
 };
