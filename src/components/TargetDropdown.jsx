@@ -41,7 +41,7 @@ const Dropdown = styled.div`
   }
 `
 
-const TargetDropdown = ({ x, y, onGuess }) => {
+const TargetDropdown = ({ x, y, onGuess, correctGuesses }) => {
   const [direction, setDirection] = useState("down");
 
   useEffect(() => {
@@ -50,25 +50,24 @@ const TargetDropdown = ({ x, y, onGuess }) => {
     setDirection(windowHeight < dropdownHeight ? "up" : "down");
   }, [y]);
 
+  const guessOptions = [
+    { name: "ball", label: "Ball", img: ball },
+    { name: "sludge", label: "Sludge", img: sludge },
+    { name: "ballboy", label: "Ball Boy", img: ballboy },
+    { name: "inflatable", label: "Inflatable", img: inflatable },
+  ];
+
+  const options = guessOptions.filter((option) => !correctGuesses.includes(option.name));
+  
   return (
     <Dropdown $x={`${x}px`} $y={`${y}px`} $direction={direction}>
       <ul>
-        <li onClick={() => onGuess('ball')}>
-          <img src={ball} />
-          Ball
+        {options.map(({ name, label, img }) => (
+        <li key={name} onClick={() => onGuess(name)}>
+          <img src={img} alt="" />
+          {label}
         </li>
-        <li onClick={() => onGuess('sludge')}>
-          <img src={sludge} />
-          Sludge
-        </li>
-        <li onClick={() => onGuess('ballboy')}>
-          <img src={ballboy} />
-          Ball Boy
-        </li>
-        <li onClick={() => onGuess('inflatable')}>
-          <img src={inflatable} />
-          Inflatable
-        </li>
+        ))}
       </ul>
     </Dropdown>
   );
