@@ -19,11 +19,10 @@ const ImageContainer = styled.div`
   }
 `;
 
-const GameImage = () => {
+const GameImage = ({ correctGuesses, setCorrectGuesses }) => {
   const [targetClick, setTargetClick] = useState(false);
   const [pixelCoords, setPixelCoords] = useState({ x: 0, y: 0 });
   const [normalizedCoords, setNormalizedCoords] = useState({ x: 0, y: 0 });
-  const [correctGuesses, setCorrectGuesses] = useState([]);
   const [markers, setMarkers] = useState([]);
 
   const handleGuess = async (name) => {
