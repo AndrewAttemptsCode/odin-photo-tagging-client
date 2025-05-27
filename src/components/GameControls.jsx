@@ -1,5 +1,6 @@
 import styled from "styled-components";
 import GameKey from "./GameKey";
+import ItemsFound from "./ItemsFound";
 
 const Container = styled.div`
   width: 100%;
@@ -7,10 +8,11 @@ const Container = styled.div`
   border: 1px solid red;
 `
 
-const GameControls = ({ correctGuesses }) => {
+const GameControls = ({ correctGuesses, guessOptions }) => {
   return (
     <Container>
-      <GameKey correctGuesses={correctGuesses} />
+      <ItemsFound correctGuesses={correctGuesses} guessOptions={guessOptions} />
+      <GameKey correctGuesses={correctGuesses} guessOptions={guessOptions} />
     </Container>
   );
 };
