@@ -1,13 +1,13 @@
 import { createBrowserRouter } from "react-router-dom";
 import Layout from "./components/Layout";
-import IndexPage from "./pages/IndexPage";
+import GamePage from "./pages/GamePage";
 
 const routes = createBrowserRouter([
   {
     path: "/",
     element: <Layout />,
     children: [
-      { path: "", element: <IndexPage />}, 
+      { path: "", element: <GamePage />}, 
     ]
   },
 ]);

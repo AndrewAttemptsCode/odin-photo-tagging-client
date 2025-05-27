@@ -15,7 +15,7 @@ const Container = styled.div`
   justify-content: center;
 `
 
-const IndexPage = () => {
+const GamePage = () => {
   const [correctGuesses, setCorrectGuesses] = useState([]);
   
   const guessOptions = [
@@ -33,4 +33,4 @@ const IndexPage = () => {
   );
 };
 
-export default IndexPage;
+export default GamePage;
