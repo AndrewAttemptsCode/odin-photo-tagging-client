@@ -19,7 +19,7 @@ const ImageContainer = styled.div`
   }
 `;
 
-const GameImage = ({ correctGuesses, setCorrectGuesses }) => {
+const GameImage = ({ correctGuesses, setCorrectGuesses, guessOptions }) => {
   const [targetClick, setTargetClick] = useState(false);
   const [pixelCoords, setPixelCoords] = useState({ x: 0, y: 0 });
   const [normalizedCoords, setNormalizedCoords] = useState({ x: 0, y: 0 });
@@ -78,7 +78,7 @@ const GameImage = ({ correctGuesses, setCorrectGuesses }) => {
     <ImageContainer onClick={handleClick}>
       <img src={beach} alt="" />
       {targetClick && (
-        <TargetBox pixelCoords={pixelCoords} handleGuess={handleGuess} correctGuesses={correctGuesses} />
+        <TargetBox pixelCoords={pixelCoords} handleGuess={handleGuess} correctGuesses={correctGuesses} guessOptions={guessOptions} />
       )}
       <ToastContainer
         position="top-center"

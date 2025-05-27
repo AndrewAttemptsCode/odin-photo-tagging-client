@@ -1,8 +1,4 @@
 import styled from "styled-components";
-import sludge from "../assets/sludge.webp";
-import ball from "../assets/ball.webp";
-import inflatable from "../assets/inflatable.webp";
-import ballboy from "../assets/ballboy.webp";
 
 const Container = styled.div`
   ul {
@@ -13,7 +9,7 @@ const Container = styled.div`
 
 const ListItem = styled.li`
   display: inline-block;
-  margin: 0.5rem;
+  margin: 0 0.5rem;
   text-align: center;
   list-style: none;
   opacity: ${({$correct}) => ($correct ? "0.5" : "1")};
@@ -26,14 +22,7 @@ const ListItem = styled.li`
   }
 `
 
-const GameKey = ({ correctGuesses }) => {
-
-  const guessOptions = [
-      { name: "ball", label: "Ball", img: ball },
-      { name: "sludge", label: "Sludge", img: sludge },
-      { name: "ballboy", label: "Ball Boy", img: ballboy },
-      { name: "inflatable", label: "Inflatable", img: inflatable },
-    ];
+const GameKey = ({ correctGuesses, guessOptions }) => {
   
   return (
     <Container>

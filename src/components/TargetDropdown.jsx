@@ -1,8 +1,4 @@
 import styled from "styled-components";
-import sludge from "../assets/sludge.webp";
-import ball from "../assets/ball.webp";
-import inflatable from "../assets/inflatable.webp";
-import ballboy from "../assets/ballboy.webp";
 import { useEffect, useState } from "react";
 
 const Dropdown = styled.div`
@@ -41,7 +37,7 @@ const Dropdown = styled.div`
   }
 `
 
-const TargetDropdown = ({ x, y, onGuess, correctGuesses }) => {
+const TargetDropdown = ({ x, y, onGuess, correctGuesses, guessOptions }) => {
   const [direction, setDirection] = useState("down");
 
   useEffect(() => {
@@ -49,13 +45,6 @@ const TargetDropdown = ({ x, y, onGuess, correctGuesses }) => {
     const windowHeight = window.innerHeight - y;
     setDirection(windowHeight < dropdownHeight ? "up" : "down");
   }, [y]);
-
-  const guessOptions = [
-    { name: "ball", label: "Ball", img: ball },
-    { name: "sludge", label: "Sludge", img: sludge },
-    { name: "ballboy", label: "Ball Boy", img: ballboy },
-    { name: "inflatable", label: "Inflatable", img: inflatable },
-  ];
 
   const options = guessOptions.filter((option) => !correctGuesses.includes(option.name));
   
