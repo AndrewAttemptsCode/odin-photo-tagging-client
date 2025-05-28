@@ -7,7 +7,7 @@ const routes = createBrowserRouter([
     path: "/",
     element: <Layout />,
     children: [
-      { path: "", element: <GamePage />}, 
+      { path: "game", element: <GamePage />}, 
     ]
   },
 ]);
