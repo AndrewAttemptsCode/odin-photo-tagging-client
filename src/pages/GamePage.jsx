@@ -7,6 +7,7 @@ import sludge from "../assets/sludge.webp";
 import ball from "../assets/ball.webp";
 import inflatable from "../assets/inflatable.webp";
 import ballboy from "../assets/ballboy.webp";
+import GameOverPopup from "../components/GameOverPopup";
 
 const Container = styled.div`
   display: flex;
@@ -27,21 +28,23 @@ const GamePage = () => {
     { name: "inflatable", label: "Inflatable", img: inflatable },
   ];
   }, []);
-  
 
+  const gameOver = correctGuesses.length === guessOptions.length;
+  
   useEffect(() => {
-    if (correctGuesses.length < guessOptions.length) {
+    if (!gameOver) {
       const counter = setInterval(() => {
       setScoreCounter(prev => prev + 1);
     }, 1000);
     return () => clearInterval(counter);
     }
-  }, [correctGuesses, guessOptions]);
+  }, [gameOver]);
 
   return (
     <Container>
       <GameImage correctGuesses={correctGuesses} setCorrectGuesses={setCorrectGuesses} guessOptions={guessOptions} />
       <GameControls correctGuesses={correctGuesses} guessOptions={guessOptions} scoreCounter={scoreCounter} />
+      {gameOver && <GameOverPopup scoreCounter={scoreCounter} />}
     </Container>
   );
 };
