@@ -1,3 +1,5 @@
+import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 
 const Container = styled.div`
@@ -13,20 +15,44 @@ const Container = styled.div`
 `
 
 const ScoreSubmission = ({ scoreCounter }) => {
+  const [username, setUsername] = useState("");
+  const [loading, setLoading] = useState(false);
+  const navigate = useNavigate();
 
-  const handleSubmit = () => {
-    // TODO: post to leaderboard with username
-    // needs restful server route
-    // post username and scorecounter
+  const handleSubmit = async(event) => {
+    event.preventDefault();
+    try {
+      setLoading(true);
+      const response = await fetch(`${import.meta.env.VITE_SERVER_URL}/leaderboard`, {
+        method: "post",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ username, score: scoreCounter }),
+      })
+
+      if (response.ok) {
+        navigate("/leaderboard");
+      }
+
+    } catch (err) {
+      console.error("Score submission error: ", err);
+    } finally {
+      setLoading(false);
+    }
+  }
+
+  const handleOnChange = (event) => {
+    setUsername(event.target.value);
   }
 
   return (
     <Container>
       <h2>Enter your name to be placed on the leaderboard.</h2>
-      <form action={handleSubmit}>
+      <form onSubmit={handleSubmit}>
         <label htmlFor="username">Name:</label>
-        <input type="text" name="username" id="username" placeholder="Enter your name..." />
-        <button type="submit">Submit</button>
+        <input type="text" name="username" id="username" placeholder="Enter your name..." value={username} onChange={handleOnChange}/>
+        <button type="submit" disabled={loading}>{loading ? "Processing..." : "Submit"}</button>
       </form>
     </Container>
   );
