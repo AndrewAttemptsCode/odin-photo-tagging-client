@@ -1,10 +1,11 @@
 import { Outlet } from "react-router-dom";
+import HeaderSection from "./HeaderSection";
 
 const Layout = () => {
   return (
     <div>
       <header>
-        Header
+        <HeaderSection />
       </header>
       <main>
         <Outlet />
@@ -14,4 +15,3 @@ const Layout = () => {
 };
 
 export default Layout;
-
