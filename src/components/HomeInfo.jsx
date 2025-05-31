@@ -5,19 +5,31 @@ const Container = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  width: 100%;
-  max-width: 900px;
-  border: 1px solid blue;
+  padding: min(1%, 0.5rem);
+  border: 2px solid #0071BC;
+  background-color: #FFFFFF;
+  border-radius: 10px;
 
   ol {
+    margin: 1.5rem;
+    padding: 0.5rem;
     font-size: 1.2rem;
+
+    & li {
+      margin-bottom: 8px;
+    }
+
+    & li::marker {
+      font-family: "Chewy", system-ui;
+      color: #FF1D25;
+      font-size: 1.5rem;
+    }
   }
 `
 
 const Logo = styled.h1`
   font-family: "Chewy", system-ui;
   font-size: 2.5rem;
-  background-color: #FFF8F0;
   border-radius: 5px;
   padding: 8px;
   color: #0071BC;
