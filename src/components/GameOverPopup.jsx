@@ -19,9 +19,10 @@ const Modal = styled.div`
   max-width: 450px;
   width: 100%;
   transform: translate(-50%, -50%);
-  background-color: #ebebeb;
-  border-radius: 5px;
-  padding: 0.5rem;
+  background-color: #FFFFFF;
+  border: 4px solid #0071BC;
+  border-radius: 10px;
+  padding: 1rem;
 `
 
 const GameOverPopup = ({ scoreCounter }) => {
@@ -36,6 +37,7 @@ const GameOverPopup = ({ scoreCounter }) => {
       <Backdrop onClick={handleOnClose} />
       <Modal>
         <ScoreSummary scoreCounter={scoreCounter} />
+        <hr />
         <ScoreSubmission scoreCounter={scoreCounter} />
       </Modal>
     </>
