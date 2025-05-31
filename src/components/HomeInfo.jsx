@@ -47,6 +47,7 @@ const StyledLink = styled(Link)`
   padding: 0.5rem 1.5rem;
   border-radius: 5px;
   font-size: 2.5rem;
+  transition: opacity 0.2s ease;
 
   &:hover {
     opacity: 0.9;
