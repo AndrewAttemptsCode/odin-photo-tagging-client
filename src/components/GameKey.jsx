@@ -12,6 +12,8 @@ const ListItem = styled.li`
   margin: 0 0.5rem;
   text-align: center;
   list-style: none;
+  color: #0071BC;
+  font-family: "Chewy", system-ui;
   opacity: ${({$correct}) => ($correct ? "0.5" : "1")};
   
   img {
