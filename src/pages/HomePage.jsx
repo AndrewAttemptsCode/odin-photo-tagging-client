@@ -4,7 +4,8 @@ import HomeInfo from "../components/HomeInfo";
 const Container = styled.div`
   display: flex;
   justify-content: center;
-  border: 1px solid red;
+  align-items: center;
+  height: 100%;
 `
 
 const HomePage = () => {
