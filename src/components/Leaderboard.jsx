@@ -5,11 +5,11 @@ import styled from "styled-components";
 
 const Table = styled.table`
   width: 100%;
+  height: 100%;
+  max-width: 1200px;
   border-collapse: collapse;
-
-  th {
-    background-color: #f9f9f9;
-  }
+  border: 2px solid #0071BC;
+  user-select: none;
 
   th, td {
     text-align: center;
@@ -20,8 +20,27 @@ const Table = styled.table`
     background-color: #f9f9f9;
   }
 
-  tbody > tr:hover {
+  tbody tr:hover {
     background-color: #f1f1f1;
+  }
+
+  thead {
+    background-color: #0071BC;
+    color: #FFFFFF;
+    font-family: "Chewy", system-ui;
+    font-size: 1.5rem;
+  }
+`
+
+const ThHide = styled.th`
+  @media (max-width: 480px) {
+    display: none;
+  }
+`
+
+const TdHide = styled.td`
+  @media (max-width: 480px) {
+    display: none;
   }
 `
 
@@ -73,8 +92,8 @@ const Leaderboard = () => {
           <th>Position</th>
           <th>Name</th>
           <th>Score</th>
-          <th>Date</th>
-          <th>Time</th>
+          <ThHide>Date</ThHide>
+          <ThHide>Time</ThHide>
         </tr>    
       </thead>
       <tbody>
@@ -83,8 +102,8 @@ const Leaderboard = () => {
             <td>{trophySelect(index + 1)}</td>
             <td>{player.username}</td>
             <td>{player.score} secs</td>
-            <td>{formatDate(player.createdAt)}</td>
-            <td>{formatTime(player.createdAt)}</td>
+            <TdHide>{formatDate(player.createdAt)}</TdHide>
+            <TdHide>{formatTime(player.createdAt)}</TdHide>
           </tr>
         ))}
       </tbody>
