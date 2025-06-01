@@ -3,7 +3,9 @@ import Leaderboard from "../components/Leaderboard";
 
 const Container = styled.section`
   display: flex;
-  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 3rem;
 `
 
 const LeaderboardPage = () => {
