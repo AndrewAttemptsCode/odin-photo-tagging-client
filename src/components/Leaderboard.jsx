@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { formatDate, formatTime } from "../utils";
 import { Star } from "lucide-react";
 import styled from "styled-components";
+import { Link } from "react-router-dom";
 
 const Table = styled.table`
   width: 100%;
@@ -44,6 +45,45 @@ const TdHide = styled.td`
   }
 `
 
+const NoPlayersContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+  max-width: 900px;
+  border: 2px solid #0071BC;
+  border-radius: 15px;
+  padding: 1rem;
+  background-color: #FFFFFF;
+  font-family: "Chewy", system-ui;
+
+  h1 {
+    font-size: 2rem;
+    color: #0071BC;
+  }
+
+  p {
+    font-size: 2rem;
+    color: #FF1D25;
+  }
+`
+
+const StyledLink = styled(Link)`
+  text-decoration: none;
+  color: #FFF8F0;
+  background-color: #0071BC;
+  padding: 0.5rem 1.5rem;
+  border-radius: 5px;
+  font-size: 2rem;
+  transition: opacity 0.2s ease;
+
+  &:hover {
+    opacity: 0.9;
+  }
+`
+
 const Leaderboard = () => {
   const [loading, setLoading] = useState(false);
   const [players, setPlayers] = useState([]);
@@ -72,6 +112,16 @@ const Leaderboard = () => {
   }, []);
 
   if (loading) return <p>Loading...</p>;
+
+  if (players.length === 0) {
+    return (
+      <NoPlayersContainer>
+        <h1>Leaderboard is empty</h1>
+        <p>Be the first!</p>
+        <StyledLink to={"/game"}>Play!</StyledLink>
+      </NoPlayersContainer>
+    );
+  };
 
   const trophySelect = (position) => {
     if (position === 1) {
