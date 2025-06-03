@@ -38,7 +38,6 @@ const GameImage = ({ correctGuesses, setCorrectGuesses, guessOptions }) => {
       });
 
       const data = await response.json();
-      console.log("Guess response:", data);
 
       if (data.status === "success") {
         toast.success(data.message);
@@ -65,9 +64,6 @@ const GameImage = ({ correctGuesses, setCorrectGuesses, guessOptions }) => {
 
     const normalizedX = x / container.width;
     const normalizedY = y / container.height;
-
-    console.log(`Normalized X: ${normalizedX}, normalized Y: ${normalizedY}`);
-    console.log(`click: pos x: ${x} pos y: ${y}`);
 
     setPixelCoords({ x, y });
     setNormalizedCoords({ x: normalizedX, y: normalizedY });
