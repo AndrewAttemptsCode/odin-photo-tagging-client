@@ -3,6 +3,7 @@ import { formatDate, formatTime } from "../utils";
 import { Star } from "lucide-react";
 import styled from "styled-components";
 import { Link } from "react-router-dom";
+import LoadingBlob from "./LoadingBlob";
 
 const Table = styled.table`
   width: 100%;
@@ -111,7 +112,7 @@ const Leaderboard = () => {
   getLeaderboard();
   }, []);
 
-  if (loading) return <p>Loading...</p>;
+  if (loading) return <LoadingBlob />;
 
   if (players.length === 0) {
     return (
